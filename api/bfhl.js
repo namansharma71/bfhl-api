@@ -18,7 +18,7 @@ module.exports = (req, res) => {
 
     data.forEach((item) => {
       if (/^[0-9]+$/.test(item)) {
-        let num = parseInt(item);
+        const num = parseInt(item);
         sum += num;
         (num % 2 === 0 ? even_numbers : odd_numbers).push(item);
       } else if (/^[a-zA-Z]+$/.test(item)) {
@@ -29,10 +29,11 @@ module.exports = (req, res) => {
       }
     });
 
-    // Generate alternating caps from reversed concat string
-    const reversedConcat = concatString.split("").reverse().map((char, idx) =>
-      idx % 2 === 0 ? char.toUpperCase() : char.toLowerCase()
-    ).join("");
+    const reversedConcat = concatString
+      .split("")
+      .reverse()
+      .map((char, idx) => (idx % 2 === 0 ? char.toUpperCase() : char.toLowerCase()))
+      .join("");
 
     res.status(200).json({
       is_success,
